@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade · Língua Portuguesa · Colégio Adventista</title>
+    <meta name="description" content="Atividade interativa de Língua Portuguesa com imagens temáticas.">
+
+    <!-- Google Fonts & Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #d9dfe8;
+            background-image: radial-gradient(circle at 10% 30%, #f1f5fa 0%, #cbd5e1 100%);
+            padding: 35px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 245, 0.9);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 48px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 220, 0.5);
+            will-change: transform;
+        }
+
+        /* ----- CABEÇALHO ESCOLA – relevo, sombras ----- */
+        .cabecalho-escola {
+            background: #0c3e2b;
+            background: linear-gradient(165deg, #0a3524, #15533b);
+            color: white;
+            padding: 28px 32px;
+            border-radius: 32px 32px 32px 32px;
+            box-shadow: 0 12px 0 #062016, 0 18px 30px #00000035;
+            border-bottom: 4px solid #b8e6b0;
+            margin-bottom: 6mm;
+        }
+
+        .cabecalho-escola h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 0 #06281e, 1px 1px 10px #adf7b2;
+        }
+
+        .cabecalho-escola h2 {
+            font-size: 1.55rem;
+            font-weight: 600;
+            border-top: 3px solid #b3ffb3;
+            border-bottom: 3px solid #b3ffb3;
+            display: inline-block;
+            padding: 10px 30px;
+            margin-top: 12px;
+            background: #1d4e3daa;
+            border-radius: 60px;
+            backdrop-filter: blur(8px);
+            box-shadow: inset 0 0 6px white;
+        }
+
+        /* Área aluno – nome fixo + dados automáticos */
+        .linha-aluno {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 24px;
+            margin-top: 28px;
+            background: #fffef0;
+            padding: 18px 28px;
+            border-radius: 40px;
+            color: #14362c;
+            font-weight: 600;
+            border: 2px solid #b4d9c2;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05), 0 8px 0 #597a6a;
+        }
+
+        .nome-aluno {
+            flex: 2;
+            min-width: 260px;
+            padding: 14px 22px;
+            border-radius: 40px;
+            border: 3px solid #146b4c;
+            background: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: inset 0 3px 8px #b3b3b3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nome-aluno i {
+            color: #146b4c;
+            font-size: 1.2rem;
+        }
+
+        .info-aluno {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            background: #e2ffd6;
+            padding: 6px 25px;
+            border-radius: 50px;
+            color: #0a3524;
+        }
+
+        .info-aluno span {
+            background: #1e4e3a;
+            color: white;
+            padding: 7px 20px;
+            border-radius: 40px;
+            font-size: 0.96rem;
+            font-weight: 500;
+            box-shadow: inset 0 -2px 0 #a0d8b0;
+        }
+
+        .espaco-5mm {
+            height: 5mm;
+            width: 100%;
+            background: transparent;
+        }
+
+        /* Índice de temas */
+        .indice-temas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0 32px;
+        }
+
+        .indice-temas span {
+            background: #ecf5e6;
+            border: 2px solid #b4d9c2;
+            color: #14362c;
+            padding: 9px 18px;
+            border-radius: 40px;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .indice-temas i {
+            color: #1c6046;
+            margin-right: 6px;
+        }
+
+        /* ---------- CARTÕES DAS QUESTÕES ---------- */
+        .questao-card {
+            background: #fffcf0;
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 35px;
+            box-shadow: -8px 8px 0 rgba(121, 142, 124, 0.3);
+            border: 1px solid #ebf5df;
+            transition: transform 0.2s ease;
+            position: relative;
+            will-change: transform;
+        }
+
+        .numero-questao {
+            display: inline-block;
+            background: #1f543e;
+            color: white;
+            font-weight: 700;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-size: 1.15rem;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 0 #0f3024, 0 8px 12px #00000025;
+            border-bottom: 2px solid #c3f7b0;
+        }
+
+        .enunciado {
+            font-size: 1.08rem;
+            line-height: 1.65;
+            margin-bottom: 20px;
+            font-weight: 500;
+            color: #1d352c;
+            background: #fafce9;
+            padding: 16px 22px;
+            border-radius: 24px;
+            border-left: 12px solid #2f7a5a;
+            box-shadow: inset 0 2px 6px #cfcfb0;
+        }
+
+        .texto-apoio {
+            background: #f2f7ee;
+            padding: 20px 24px;
+            border-radius: 24px;
+            margin-bottom: 22px;
+            border: 2px dashed #3c705b;
+            color: #1d352c;
+            font-size: 1.02rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .texto-apoio strong {
+            font-style: normal;
+            color: #1f543e;
+        }
+
+        /* alternativas múltipla escolha */
+        .alternativas {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 8px;
+        }
+
+        .opcao {
+            background: #f7faf3;
+            padding: 14px 25px;
+            border-radius: 20px;
+            border: 2px solid #c2d9cb;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.03rem;
+            box-shadow: 0 4px 0 #8ba296;
+            cursor: pointer;
+            transition: 0.08s;
+            font-weight: 500;
+        }
+
+        .opcao:hover {
+            background: #dff3e3;
+            border-color: #3a785b;
+        }
+
+        .opcao.selecionada {
+            background: #0f4a34 !important;
+            color: white !important;
+            border: 2px solid #002f1f;
+            box-shadow: inset 0 6px 10px rgba(0, 0, 0, 0.3), inset 0 0 0 3px #a0dbb0;
+            transform: translateY(5px);
+            border-color: #0a3a2a;
+        }
+
+        .opcao.selecionada i {
+            color: #dafadc;
+        }
+
+        .opcao i {
+            width: 28px;
+            text-align: center;
+            font-size: 1.3rem;
+            color: #2b7359;
+        }
+
+        /* Área discursiva */
+        .discursiva-area {
+            width: 100%;
+            margin-top: 18px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 22px;
+            border-radius: 28px;
+            border: 4px solid #b6d5c2;
+            font-size: 1.02rem;
+            resize: vertical;
+            background: #fffef9;
+            box-shadow: inset 0 4px 12px #b8cfc0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        textarea:focus {
+            border-color: #1b7a53;
+            outline: none;
+            background: #fffffc;
+        }
+
+        .btn-enviar {
+            background: #1a4e3a;
+            border: none;
+            color: white;
+            padding: 20px 48px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin: 40px auto 20px;
+            box-shadow: 0 16px 0 #0d3026, 0 18px 35px black;
+            transition: 0.06s linear;
+            cursor: pointer;
+            border: 2px solid #b3f0b3;
+            width: fit-content;
+        }
+
+        .btn-enviar:active {
+            box-shadow: 0 7px 0 #0d3026;
+            transform: translateY(9px);
+        }
+
+        .btn-enviar:disabled {
+            cursor: not-allowed;
+        }
+
+        .rodape-msg {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e4d3a;
+            min-height: 1.6em;
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 700px) {
+            .main-container {
+                padding: 22px 16px;
+                border-radius: 30px;
+            }
+
+            .cabecalho-escola {
+                padding: 22px 20px;
+            }
+
+            .cabecalho-escola h1 {
+                font-size: 1.5rem;
+            }
+
+            .cabecalho-escola h2 {
+                font-size: 1.1rem;
+                padding: 8px 18px;
+            }
+
+            .linha-aluno {
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 24px;
+            }
+
+            .nome-aluno {
+                min-width: 0;
+            }
+
+            .info-aluno {
+                border-radius: 20px;
+                justify-content: center;
+            }
+
+            .questao-card {
+                padding: 22px 18px;
+            }
+
+            .btn-enviar {
+                font-size: 1.15rem;
+                padding: 16px 30px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .cabecalho-escola h1 {
+                font-size: 1.25rem;
+            }
+
+            .info-aluno span {
+                font-size: 0.82rem;
+                padding: 6px 14px;
+            }
+        }
+
+        /* Imagens temáticas inseridas em cada questão */
+        .imagem-enunciado {
+            margin: 0 0 22px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 3px solid #c1dec8;
+            background: #eaf5e8;
+            box-shadow: 0 7px 0 rgba(83, 119, 92, 0.25);
+        }
+        .imagem-enunciado img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+        .imagem-enunciado:hover img { transform: scale(1.025); }
+        .imagem-enunciado figcaption {
+            padding: 9px 15px;
+            color: #214f39;
+            font-size: 0.88rem;
+            font-weight: 600;
+            background: #f4fbea;
+        }
+        @media (max-width: 700px) {
+            .imagem-enunciado img { height: 145px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+
+        <!-- CABEÇALHO OFICIAL COLÉGIO ADVENTISTA -->
+        <div class="cabecalho-escola">
+            <h1>COLÉGIO ADVENTISTA</h1>
+            <h2>ATIVIDADE DE LÍNGUA PORTUGUESA</h2>
+
+            <!-- DADOS DO ALUNO: NOME FIXO + DATA AUTOMÁTICA -->
+            <div class="linha-aluno">
+                <div class="nome-aluno"><i class="fas fa-user-graduate"></i> João Pedro de Oliveira Alexandre Vilera</div>
+                <div class="info-aluno">
+                    <span id="campoData"><i class="fas fa-calendar-day"></i> DATA: --/--/----</span>
+                    <span><i class="fas fa-school"></i> Colégio Adventista</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESPAÇAMENTO DE 5mm -->
+        <div class="espaco-5mm"></div>
+
+        <!-- ÍNDICE DE TEMAS DA ATIVIDADE -->
+        <div class="indice-temas">
+            <span><i class="fas fa-book-open"></i>Interpretação de Texto</span>
+            <span><i class="fas fa-pen-fancy"></i>Formas Nominais do Verbo</span>
+            <span><i class="fas fa-bolt"></i>Advérbios e Locução Adverbial</span>
+            <span><i class="fas fa-comments"></i>Variação Linguística</span>
+            <span><i class="fas fa-map-marker-alt"></i>Onde/Aonde</span>
+        </div>
+
+        <!-- Q1 · MÚLTIPLA ESCOLHA · INTERPRETAÇÃO DE TEXTO -->
+        <div class="questao-card" data-questao="1" data-tipo="me" data-gabarito="B" data-tema="Interpretação de Texto">
+            <div class="numero-questao"><i class="fas fa-book-open"></i> QUESTÃO 01 · INTERPRETAÇÃO DE TEXTO</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=82" alt="Jardim florido cuidado com carinho" loading="lazy"><figcaption>Jardim florido cuidado com carinho</figcaption></figure>
+            <div class="texto-apoio">
+                <strong>O jardim de dona Alzira</strong> — Desde cedo, Marina aprendeu que ajudar não precisa de
+                grandes gestos. Todas as manhãs, antes de ir à escola, ela regava as plantas da vizinha, dona Alzira,
+                que já não conseguia se abaixar com facilidade. Um dia, ao chegar para a rega de costume, encontrou
+                um bilhete preso ao portão: "Vou visitar minha filha por alguns dias. Obrigada por cuidar do meu
+                jardim com tanto carinho." Marina sorriu. Não esperava reconhecimento, mas foi bom senti-lo.
+            </div>
+            <div class="enunciado">
+                Qual é o sentimento predominante de Marina ao final do texto?
+            </div>
+            <div class="alternativas" id="alt1">
+                <div class="opcao" onclick="selecionarAlternativa(this, 1, 'A')"><i class="far fa-circle"></i> A)
+                    Frustração por não ser paga pelo trabalho.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 1, 'B')"><i class="far fa-circle"></i> B)
+                    Surpresa e satisfação discreta diante do gesto de dona Alzira.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 1, 'C')"><i class="far fa-circle"></i> C)
+                    Indiferença, pois já esperava o reconhecimento.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 1, 'D')"><i class="far fa-circle"></i> D)
+                    Tristeza porque a vizinha vai viajar.</div>
+            </div>
+        </div>
+
+        <!-- Q2 · MÚLTIPLA ESCOLHA · INTERPRETAÇÃO DE TEXTO -->
+        <div class="questao-card" data-questao="2" data-tipo="me" data-gabarito="D" data-tema="Interpretação de Texto">
+            <div class="numero-questao"><i class="fas fa-book-open"></i> QUESTÃO 02 · INTERPRETAÇÃO DE TEXTO</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1455885666463-7f1c7d6c9f6b?auto=format&fit=crop&w=1200&q=82" alt="Livro aberto e leitura atenta" loading="lazy"><figcaption>Livro aberto e leitura atenta</figcaption></figure>
+            <div class="enunciado">
+                No trecho "Não esperava reconhecimento, <strong>mas</strong> foi bom senti-lo", a conjunção destacada
+                estabelece entre as orações uma relação de:
+            </div>
+            <div class="alternativas" id="alt2">
+                <div class="opcao" onclick="selecionarAlternativa(this, 2, 'A')"><i class="far fa-circle"></i> A)
+                    Causa.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 2, 'B')"><i class="far fa-circle"></i> B)
+                    Adição.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 2, 'C')"><i class="far fa-circle"></i> C)
+                    Conclusão.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 2, 'D')"><i class="far fa-circle"></i> D)
+                    Oposição/contraste.</div>
+            </div>
+        </div>
+
+        <!-- Q3 · MÚLTIPLA ESCOLHA · FORMAS NOMINAIS DO VERBO -->
+        <div class="questao-card" data-questao="3" data-tipo="me" data-gabarito="A" data-tema="Formas Nominais do Verbo">
+            <div class="numero-questao"><i class="fas fa-pen-fancy"></i> QUESTÃO 03 · FORMAS NOMINAIS DO VERBO</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=82" alt="Pessoa escrevendo e estudando verbos" loading="lazy"><figcaption>Pessoa escrevendo e estudando verbos</figcaption></figure>
+            <div class="enunciado">
+                Se reescrevêssemos o trecho "ela regava as plantas da vizinha" utilizando a forma nominal que indica
+                uma ação em curso, simultânea a outra (gerúndio), a frase ficaria:
+            </div>
+            <div class="alternativas" id="alt3">
+                <div class="opcao" onclick="selecionarAlternativa(this, 3, 'A')"><i class="far fa-circle"></i> A)
+                    ela regando as plantas da vizinha.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 3, 'B')"><i class="far fa-circle"></i> B)
+                    ela regar as plantas da vizinha.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 3, 'C')"><i class="far fa-circle"></i> C)
+                    ela regado as plantas da vizinha.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 3, 'D')"><i class="far fa-circle"></i> D)
+                    ela rega as plantas da vizinha.</div>
+            </div>
+        </div>
+
+        <!-- Q4 · MÚLTIPLA ESCOLHA · FORMAS NOMINAIS DO VERBO -->
+        <div class="questao-card" data-questao="4" data-tipo="me" data-gabarito="C" data-tema="Formas Nominais do Verbo">
+            <div class="numero-questao"><i class="fas fa-pen-fancy"></i> QUESTÃO 04 · FORMAS NOMINAIS DO VERBO</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=82" alt="Caderno com palavras e escrita" loading="lazy"><figcaption>Caderno com palavras e escrita</figcaption></figure>
+            <div class="enunciado">
+                Na frase "Vou <strong>visitar</strong> minha filha por alguns dias", a forma verbal destacada
+                classifica-se como:
+            </div>
+            <div class="alternativas" id="alt4">
+                <div class="opcao" onclick="selecionarAlternativa(this, 4, 'A')"><i class="far fa-circle"></i> A)
+                    Gerúndio.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 4, 'B')"><i class="far fa-circle"></i> B)
+                    Particípio.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 4, 'C')"><i class="far fa-circle"></i> C)
+                    Infinitivo.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 4, 'D')"><i class="far fa-circle"></i> D)
+                    Presente do indicativo.</div>
+            </div>
+        </div>
+
+        <!-- Q5 · MÚLTIPLA ESCOLHA · ADVÉRBIOS E LOCUÇÃO ADVERBIAL -->
+        <div class="questao-card" data-questao="5" data-tipo="me" data-gabarito="B" data-tema="Advérbios e Locução Adverbial">
+            <div class="numero-questao"><i class="fas fa-bolt"></i> QUESTÃO 05 · ADVÉRBIOS E LOCUÇÃO ADVERBIAL</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=82" alt="Relógio representando a ideia de tempo" loading="lazy"><figcaption>Relógio representando a ideia de tempo</figcaption></figure>
+            <div class="enunciado">
+                Em "<strong>Desde cedo</strong>, Marina aprendeu que ajudar não precisa de grandes gestos", a
+                expressão destacada classifica-se como:
+            </div>
+            <div class="alternativas" id="alt5">
+                <div class="opcao" onclick="selecionarAlternativa(this, 5, 'A')"><i class="far fa-circle"></i> A)
+                    Locução adverbial de lugar.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 5, 'B')"><i class="far fa-circle"></i> B)
+                    Locução adverbial de tempo.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 5, 'C')"><i class="far fa-circle"></i> C)
+                    Advérbio de intensidade.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 5, 'D')"><i class="far fa-circle"></i> D)
+                    Locução adverbial de negação.</div>
+            </div>
+        </div>
+
+        <!-- Q6 · MÚLTIPLA ESCOLHA · ADVÉRBIOS E LOCUÇÃO ADVERBIAL -->
+        <div class="questao-card" data-questao="6" data-tipo="me" data-gabarito="B" data-tema="Advérbios e Locução Adverbial">
+            <div class="numero-questao"><i class="fas fa-bolt"></i> QUESTÃO 06 · ADVÉRBIOS E LOCUÇÃO ADVERBIAL</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=82" alt="Pessoa trabalhando cuidadosamente no computador" loading="lazy"><figcaption>Pessoa trabalhando cuidadosamente no computador</figcaption></figure>
+            <div class="enunciado">
+                Assinale a alternativa em que o termo destacado expressa uma circunstância de <strong>modo</strong>:
+            </div>
+            <div class="alternativas" id="alt6">
+                <div class="opcao" onclick="selecionarAlternativa(this, 6, 'A')"><i class="far fa-circle"></i> A)
+                    Ele chegou <strong>tarde</strong> à reunião.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 6, 'B')"><i class="far fa-circle"></i> B)
+                    Ela cuidou do jardim <strong>cuidadosamente</strong>.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 6, 'C')"><i class="far fa-circle"></i> C)
+                    Eles moram <strong>ali</strong>.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 6, 'D')"><i class="far fa-circle"></i> D)
+                    <strong>Não</strong> vou à festa hoje.</div>
+            </div>
+        </div>
+
+        <!-- Q7 · MÚLTIPLA ESCOLHA · VARIAÇÃO LINGUÍSTICA -->
+        <div class="questao-card" data-questao="7" data-tipo="me" data-gabarito="B" data-tema="Variação Linguística">
+            <div class="numero-questao"><i class="fas fa-comments"></i> QUESTÃO 07 · VARIAÇÃO LINGUÍSTICA</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=82" alt="Pessoas conversando em contextos diferentes" loading="lazy"><figcaption>Pessoas conversando em contextos diferentes</figcaption></figure>
+            <div class="texto-apoio">
+                I. "Cê vai lá hoje ou não vai?"<br>
+                II. "Você irá até lá hoje?"
+            </div>
+            <div class="enunciado">
+                Os enunciados I e II acima exemplificam, respectivamente, o uso da língua em registro:
+            </div>
+            <div class="alternativas" id="alt7">
+                <div class="opcao" onclick="selecionarAlternativa(this, 7, 'A')"><i class="far fa-circle"></i> A)
+                    regional e histórico.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 7, 'B')"><i class="far fa-circle"></i> B)
+                    informal e formal.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 7, 'C')"><i class="far fa-circle"></i> C)
+                    formal e informal.</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 7, 'D')"><i class="far fa-circle"></i> D)
+                    técnico e coloquial.</div>
+            </div>
+        </div>
+
+        <!-- Q8 · DISCURSIVA · VARIAÇÃO LINGUÍSTICA -->
+        <div class="questao-card" data-questao="8" data-tipo="disc" data-tema="Variação Linguística">
+            <div class="numero-questao"><i class="fas fa-comments"></i> QUESTÃO 08 · DISCURSIVA</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=82" alt="Grupo diverso dialogando e compartilhando ideias" loading="lazy"><figcaption>Grupo diverso dialogando e compartilhando ideias</figcaption></figure>
+            <div class="enunciado">
+                Explique, com suas palavras, por que a língua portuguesa falada no Brasil apresenta variações de
+                acordo com a região, a idade e o grau de escolaridade dos falantes. Em seguida, cite um exemplo de
+                variação linguística que você já percebeu no seu dia a dia.
+            </div>
+            <div class="discursiva-area">
+                <textarea id="resp8" placeholder="Escreva sua resposta aqui..."></textarea>
+            </div>
+        </div>
+
+        <!-- Q9 · MÚLTIPLA ESCOLHA · ONDE/AONDE -->
+        <div class="questao-card" data-questao="9" data-tipo="me" data-gabarito="B" data-tema="Onde/Aonde">
+            <div class="numero-questao"><i class="fas fa-map-marker-alt"></i> QUESTÃO 09 · ONDE/AONDE</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200&q=82" alt="Mapa e marcador indicando destino" loading="lazy"><figcaption>Mapa e marcador indicando destino</figcaption></figure>
+            <div class="enunciado">
+                Complete corretamente a frase: "_______ você vai passar as férias?"
+            </div>
+            <div class="alternativas" id="alt9">
+                <div class="opcao" onclick="selecionarAlternativa(this, 9, 'A')"><i class="far fa-circle"></i> A)
+                    Onde</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 9, 'B')"><i class="far fa-circle"></i> B)
+                    Aonde</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 9, 'C')"><i class="far fa-circle"></i> C)
+                    Donde</div>
+                <div class="opcao" onclick="selecionarAlternativa(this, 9, 'D')"><i class="far fa-circle"></i> D)
+                    Há onde</div>
+            </div>
+        </div>
+
+        <!-- Q10 · DISCURSIVA · ONDE/AONDE -->
+        <div class="questao-card" data-questao="10" data-tipo="disc" data-tema="Onde/Aonde">
+            <div class="numero-questao"><i class="fas fa-map-marker-alt"></i> QUESTÃO 10 · DISCURSIVA</div>
+            <figure class="imagem-enunciado"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=82" alt="Estrada apontando para diferentes lugares" loading="lazy"><figcaption>Estrada apontando para diferentes lugares</figcaption></figure>
+            <div class="enunciado">
+                Explique a diferença de uso entre "onde" e "aonde". Depois, escreva duas frases próprias e corretas:
+                uma utilizando "onde" e outra utilizando "aonde".
+            </div>
+            <div class="discursiva-area">
+                <textarea id="resp10" placeholder="Escreva sua resposta aqui..."></textarea>
+            </div>
+        </div>
+
+        <!-- Botão de envio para Google Sheets -->
+        <button id="enviarBtn" class="btn-enviar" onclick="enviarRespostas()">
+            <i class="fas fa-paper-plane"></i> ENVIAR RESPOSTAS
+        </button>
+        <div id="msgStatus" class="rodape-msg"></div>
+    </div>
+
+    <script>
+        // -------------------------------------------------------------
+        // DADOS FIXOS DO ALUNO
+        // -------------------------------------------------------------
+        const aluno = {
+            nome: "João Pedro de Oliveira Alexandre Vilera",
+            escola: "Colégio Adventista"
+        };
+
+        // Preencher data automática (DD/MM/AAAA)
+        (function preencherData() {
+            const hoje = new Date();
+            const dd = String(hoje.getDate()).padStart(2, '0');
+            const mm = String(hoje.getMonth() + 1).padStart(2, '0');
+            const yyyy = hoje.getFullYear();
+            document.getElementById('campoData').innerHTML =
+                `<i class="fas fa-calendar-day"></i> DATA: ${dd}/${mm}/${yyyy}`;
+        })();
+
+        // -------------------------------------------------------------
+        // FUNÇÕES DE SELEÇÃO DE ALTERNATIVAS
+        // -------------------------------------------------------------
+        function selecionarAlternativa(elemento, numQuestao, letra) {
+            let container = elemento.closest('.alternativas');
+            if (!container) return;
+            let opcoes = container.querySelectorAll('.opcao');
+            opcoes.forEach(op => op.classList.remove('selecionada'));
+            elemento.classList.add('selecionada');
+            let qCard = elemento.closest('.questao-card');
+            qCard.setAttribute('data-resp-aluno', letra);
+        }
+
+        // -------------------------------------------------------------
+        // URL DO GOOGLE APPS SCRIPT (Web App) LIGADO À PLANILHA:
+        // https://docs.google.com/spreadsheets/d/14Gjn_F64vr2AIWWNBkqxx4ea94QA8wPUXDgCs60KsuI/edit
+        // Substitua abaixo pela URL gerada após publicar o script como Web App
+        // (veja instruções no arquivo "instrucoes_google_sheets.md")
+        // -------------------------------------------------------------
+        const WEB_APP_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT_WEB_APP';
+
+        function enviarRespostas() {
+            const btn = document.getElementById('enviarBtn');
+            const msg = document.getElementById('msgStatus');
+
+            if (WEB_APP_URL.includes('COLE_AQUI')) {
+                msg.innerHTML = '⚠️ Configure a URL do Apps Script (WEB_APP_URL) antes de enviar.';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            msg.innerHTML = '📤 Enviando respostas...';
+
+            // Coletar respostas em ordem (Q1-Q10), com tema de cada questão
+            let questoes = document.querySelectorAll('.questao-card');
+            let respostas_array = [];
+
+            questoes.forEach((q) => {
+                let tipo = q.getAttribute('data-tipo');
+                let tema = q.getAttribute('data-tema');
+                let numero = q.getAttribute('data-questao');
+                let valor;
+                if (tipo === 'me') {
+                    let selecionada = q.querySelector('.opcao.selecionada');
+                    valor = selecionada ? selecionada.innerText.trim().charAt(0) : '-';
+                } else {
+                    let textarea = q.querySelector('textarea');
+                    valor = textarea ? textarea.value.trim() : '';
+                }
+                respostas_array.push({ questao: numero, tema: tema, resposta: valor });
+            });
+
+            let payload = {
+                aluno_nome: aluno.nome,
+                escola: aluno.escola,
+                data_envio: new Date().toLocaleString('pt-BR'),
+                respostas_array: respostas_array
+            };
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Necessário para Google Apps Script
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+                .then(() => {
+                    msg.innerHTML = '✅ Respostas enviadas com sucesso para a planilha!';
+                    btn.innerHTML = '<i class="fas fa-check"></i> ENVIADO';
+                })
+                .catch(err => {
+                    console.error(err);
+                    msg.innerHTML = '❌ Erro ao enviar. Verifique sua conexão e tente novamente.';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                });
+        }
+    </script>
+
+</body>
+
+</html>
